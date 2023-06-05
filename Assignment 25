@@ -1,0 +1,317 @@
+/*1.Define a class Complex to represent a complex number. Declare instance member
+ variables to store real and imaginary part of a complex number, also define instance
+ member functions to set values of complex number and print values of complex number*/
+#include<iostream>
+using namespace std;
+class Complex{
+    private:
+       int img,real;
+    public:
+       void setComplex(int r,int i)
+       {
+        img=i;
+        real=r;
+       }
+       void printComplex()
+       {
+         cout<<real<<" + "<<img<<"i"<<endl;
+       }
+};
+int main()
+{
+   Complex c;
+   c.setComplex(2,3);
+   c.printComplex();
+}
+
+/*
+   2.Define a class Time to represent Time (like 3 hr 45 min 20 sec). Declare appropriate
+   number of instance member variables and also define instance member functions to set values for time and display values of time. 
+*/
+#include<iostream>
+using namespace std;
+class Time
+{
+    int hour,minute,second;
+    public:
+ 
+      void setTime(int h,int m,int s)
+      {
+        hour=h;minute=m;second=s;
+      }
+       void normalize()
+       {
+          minute=minute+second/60;
+          second=second%60;
+          hour=hour+minute/60;
+          minute=minute%60;
+       }
+       void showTime()
+       {
+          normalize();//call it
+          cout<<hour<<" : "<<minute<<" : "<<second<<endl;
+       }
+       
+       Time add(Time t)
+       {
+          Time temp;
+          temp.second=second+t.second;
+          temp.hour=hour+t.hour;
+          temp.minute=minute+t.minute;
+          return temp;
+       }
+};
+int main()
+{
+    Time t1,t2;
+    t1.setTime(12,43,65);
+    t2.setTime(12,43,65);
+    Time t3=t1.add(t2);//operator overloading
+    t1.showTime();
+    t2.showTime();
+    t3.showTime();
+    return 0;
+}
+
+/* 
+  3.Define a class Factorial and define an instance member function to find the Factorial of a number using class.
+*/
+
+#include<iostream>
+using namespace std;
+class Factorial
+{
+    private:
+        int n;
+        int fact;
+    public:
+        void setN(int x)
+        {
+            n=x;
+        }
+        int getN()
+        {
+            return n;
+        }
+        int getFactorial()
+        {
+            return fact;
+        }
+        void calculateFact()//does not pass parameter becuase implicitly acceess the value of object
+        {
+            int i,f=1;
+            if(n<=0)
+            {
+                fact=1;
+                return;
+            }
+            for(i=1;i<=n;i++)
+            {
+                f=f*i;
+            }
+            fact=f;
+        }
+};
+int main()
+{
+    Factorial f;
+    f.setN(5);
+    f.calculateFact();
+    cout<<"Factorial of "<<f.getN()<<" is "<<f.getFactorial()<<endl;
+    return 0;
+}
+
+
+/*
+ 4.Define a class ReverseNumber and define an instance member function to find Reverse of a Number using class
+*/
+#include<iostream>
+using namespace std;
+class reverseNumber{
+    int actualNumber;
+    int reverseNumber;
+    public:
+       void setActualNumber(int n)
+       {actualNumber=n;}
+       int getActualNumber()
+       {return actualNumber;}
+       int getReverseNumber()
+       {return reverseNumber;}
+       void calculateReverseNumber()
+       {
+        int r;
+        reverseNumber=0;
+        int n=actualNumber;
+        while(n)
+        {
+            r=n%10;
+            reverseNumber=reverseNumber*10+r;
+            n=n/10;
+        }
+       }
+};
+int main()
+{
+    reverseNumber rv;
+    rv.setActualNumber(123);
+    rv.calculateReverseNumber();
+    cout<<"Reverse of "<<rv.getActualNumber()<<" is "<<rv.getReverseNumber()<<endl;
+    return 0;
+}
+
+/* 
+  6. Define a class Square to find the square of a number and write a C++ program to Count number of times a function is called.
+ */
+#include<iostream>
+using namespace  std;
+class Square{
+    int x,x2;
+    static int count;//by default initial value is zero
+    public:
+       void setX(int a)
+       {x=a;}
+       int getX()
+       {return x;}
+       void square()
+       {x2=x*x;++count;}
+       int getSqauare()
+       {return x2;}
+       int getCount()
+       {return count;}
+};
+int Square::count=0;
+int main()
+{
+    Square s;
+    s.setX(5);
+    s.square();
+    cout<<"Square of "<<s.getX()<<" is "<<s.getSqauare()<<endl;
+    cout<<s.getCount()<<" called the function"<<endl;
+    return 0;
+}
+
+// 7. Define a class Greatest and define instance member function to find Largest among 3 numbers using classes.
+#include<iostream>
+using namespace std;
+class Greatest{
+    public:
+        //instance member function
+        int findGreatestValue(int a,int b,int c)
+        {
+            return (a>b?(a>c?a:c):(b>c?b:c));
+        }
+
+};
+int main()
+{
+    Greatest g;
+    int a,b,c;
+    cout<<"Enter 3 numbers"<<endl;
+    cin>>a>>b>>c;
+    cout<<"Greatest number among between "<<a<<","<<b<<" & "<<c<<" is "<<g.findGreatestValue(a,b,c)<<endl;
+}
+
+// 8.Define a class Rectangle and define an instance member function to find the area of the rectangle
+#include<iostream>
+using namespace std;
+class Rectangle
+{
+    int length,breath;
+    public:
+   
+       int Area(int l,int b)
+       {
+           length=l;
+           breath=b;
+           return length*breath;
+       }
+   
+};
+int main()
+{
+    int l,b;
+    cout<<"enter length of rectangle: ";
+    cin>>l;
+    cout<<"enter breath of rectangle: ";
+    cin>>b;
+  
+    Rectangle r;
+    
+    cout<<"Area of this rectangle is "<<r.Area(l,b);
+}
+
+// 9.Define a class Circle and define an instance member function to find the area of the circle.
+#include<iostream>
+using namespace std;
+class Circle
+{
+    float radius;
+    public:
+    
+       float Area(float r)
+       {
+           radius=r;
+           return 3.14*radius*radius;
+       }
+    
+};
+int main()
+{
+    float r;
+    cout<<"enter radius of circle : ";
+    cin>>r;
+    
+    Circle c;
+    
+    cout<<"Area of this rectangle is "<<c.Area(r);
+    return 0;
+}
+
+/*
+10.Define a class Area and define instance member functions to find the area of the
+   different shapes like square, rectangle , circle etc.
+*/
+#include<iostream>
+using namespace std;
+class Area{
+    float r,side,len,breath,radius;
+    public:
+        void setSide(float a)
+        {
+            side=a;
+        }
+
+        void setLengthBreath(float l,float b)
+        {
+            len=l;
+            breath=b;
+        }
+        void setRadius(float r)
+        {
+            radius=r;
+        }
+        float areaOfSquare()
+        {
+            return side*side;
+        }
+        float areaOfRectangle()
+        {
+            return len*breath;
+        }
+        float areaOfCircle()
+        {
+            return 3.14*radius*radius;
+        }
+};
+int main()
+{
+    Area a;
+    a.setSide(4);
+    a.setLengthBreath(3,2);
+    a.setRadius(4);
+    cout<<"Area of Circle is "<<a.areaOfCircle()<<endl;
+    cout<<"Area of Rectangle is "<<a.areaOfRectangle()<<endl;
+    cout<<"Area of Square is "<<a.areaOfSquare()<<endl;
+    return 0;
+
+}
