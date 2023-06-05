@@ -6,7 +6,7 @@
 #include<iostream>
 using namespace std;
 class Complex{
-    private:
+    private: 
        int img,real;
     public:
        void setComplex(int r,int i)
