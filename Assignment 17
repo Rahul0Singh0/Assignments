@@ -1,0 +1,206 @@
+1.Program
+#include<stdio.h>
+int main()
+{
+    char a[]="Rahul";
+    int i=0;
+    // while (a[i]!='\0')
+    while(a[i])
+    {
+
+        i++;
+    }
+    printf("%d ",i);
+
+    return 0;
+}
+
+2.Program
+#include<stdio.h>
+int main()
+{
+    char arr[100];
+    char a;
+    int i=0,count=0;
+    printf("Enter a string : ");
+    fgets(arr,100,stdin);
+    printf("Enter a character to check how many time occurence in given string : ");
+    scanf("%c",&a);
+    while(arr[i])
+    {
+        if(arr[i]==a)
+            count++;
+        i++;
+    }
+    printf("%c is occurenece %d times in given string",a,count);
+    return 0;
+}
+
+3.Program
+// Write a program to count vowels in a given string
+#include<stdio.h>
+int main()
+{
+    char str[20]="Knowledge";
+    int i=0,count=0;
+    while(str[i])
+    {
+        if(str[i]=='a'||str[i]=='e'||str[i]=='i'||str[i]=='o'||str[i]=='u')
+        {
+            count++;
+        }
+        i++;
+    }
+    printf("%d times vowels occur in %s",count,str);
+    return 0;
+}
+
+4.Program
+// Write a program to convert a given string into uppercase
+#include<stdio.h>
+int main()
+{
+    char arr[100];
+    int i=0;
+    printf("Enter a string in lower case : ");
+    fgets(arr,100,stdin);
+    while(arr[i])
+    {
+        if(arr[i]>='a' && arr[i]<='z')
+            arr[i]=arr[i]-32;
+        i++;
+    }
+    printf("%s",arr);
+    return 0;
+}
+
+5.Program
+// Write a program to convert a given string into lowercase
+#include<stdio.h>
+int main()
+{
+    char arr[100];
+    int i=0;
+    printf("Enter a string in lower case : ");
+    fgets(arr,100,stdin);
+    while(arr[i])
+    {
+        if(arr[i]>='A' && arr[i]<='Z')
+            arr[i]=arr[i]+32;
+        i++;
+    }
+    printf("%s",arr);
+    return 0;
+}
+
+6.Program
+// Write a program to reverse a string.
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char arr[100];
+    int i,j;
+    printf("Enter a string : ");
+    fgets(arr,100,stdin);
+    // arr[strlen(arr)-1]='0';
+
+    i=0;
+    j=strlen(arr)-1;
+    while(i<=j)
+    {
+        char t=arr[i];
+        arr[i]=arr[j];
+        arr[j]=t;
+        i++;j--;
+    }
+    printf("%s",arr);
+    return 0;
+}
+
+7.Program
+#include<stdio.h>
+int main()
+{
+    char ch[]={"Rahul Singh 123@#442!"};
+    int alp=0,dig=0,other=0,i=0;
+    while(ch[i])
+    {
+        if((ch[i]>='A'&&ch[i]<='Z') ||(ch[i]>='a'&&ch[i]<='z'))
+                  alp++;
+        else if(ch[i]>='0' && ch[i]<='9')
+                dig++;
+        else
+                other++;
+        i++;
+    }
+    printf("No. of alphabets are %d\nNo. of digits are %d\n and total other characters are %d",alp,dig,other);
+    return 0;
+}
+
+8.Program
+// Write a program in C to copy one string to another string
+#include<stdio.h>
+int main()
+{
+    char *c={"Rahul Singh"};
+    char ch[10];
+    int i=0;
+    while(c[i]!='\0')
+    {
+        ch[i]=c[i];
+        i++;
+    }
+    for(int j=0;j<i;j++)
+        printf("%c",ch[j]);
+    return 0;
+}
+
+9.Program
+// Write a C program to sort a string array in ascending order
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char c[]={"Rahul"};
+    int i,j;
+    // int l=strlen(c)-1;
+    for(i=0;c[i]!='\0';i++)
+    {
+        for(j=0;c[j]!='\0';j++)
+        {
+            if(c[i]>c[j+1])
+            {
+                char temp=c[i];
+                c[i]=c[j+1];
+                c[j+1]=temp;
+            }
+        }
+    }
+    for(j=0;c[j]!='\0';j++)
+       printf("%c",c[j]);
+    return 0;
+}
+
+10.Program
+// Write a program in C to Find the Frequency of Characters.
+#include<stdio.h>
+int main()
+{
+    char a[]="Prateek";
+    int freq[150]={0};
+    int i=0;
+    while(a[i]!='\0')
+    {
+        freq[a[i]]++;
+        i++;
+    }
+    for(i=0;i<150;i++)
+    {
+        if(freq[i]!=0)
+        {
+            printf("%c==>%d\n",i,freq[i]);
+        }
+    }
+
+}
