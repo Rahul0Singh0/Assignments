@@ -1,0 +1,301 @@
+1.Program
+// Write a function to calculate length of the string
+#include<stdio.h>
+int Len(char *ar)
+{
+    int i=0;
+    while(ar[i]!='\0')
+    {
+        i++;
+    }
+    return i;
+}
+int main()
+{
+    char ar[]="Rahul Singh";
+    printf("%d",Len(ar));
+    return 0;
+}
+
+2.Program
+// Write a function to reverse a string.
+#include<stdio.h>
+#include<string.h>
+char *reverse(char *str)
+{
+    int i=0;
+    int j=strlen(str)-1;
+    while(i<=j)
+    {
+        char t=str[i];
+        str[i]=str[j];
+        str[j]=t;
+        i++;j--;
+    }
+    return str;
+}
+int main()
+{
+    char str[]="rahul singh";
+    printf("%s",reverse(str));
+}
+
+3.Program
+//Write a function to compare two strings
+#include<stdio.h>
+int stringCompare(char *str1,char *str2)
+{
+    int i=0;
+    while(str1[i]!='\0'||str2[i]!='\0')
+    {
+        if(str1[i]==str2[i])
+           i++;
+        else if(str1[i]!=str2[i])
+           return -1;
+        if(str1[i]=='\0' && str2[i]=='\0')
+           return 0;
+    }
+    return -1;
+}
+//strcmp() override
+int strcmppp(char *str1,char *str2)
+{
+    int i=0;
+    while(str1[i]!='\0'||str2[i]!='\0')
+    {
+        if(str1[i]-str2[i]==0)
+            i++;
+        else if(str1[i]-str2[i]>0)
+            return -1;
+        else
+           return -1;
+    }
+    return 0;
+}
+int main()
+{
+    char str1[]="Rahul";
+    char str2[]="Rahul";
+    if(strcmppp(str1,str2)==0)
+       printf("Both strings are same");
+    else
+       printf("Both strings are different");
+    return 0;
+}
+
+4.Program
+// Write a function to transform string into uppercase
+#include<stdio.h>
+char *transform(char *arr)
+{
+    int i=0;
+    while(arr[i]!='\0')
+    {
+        if(arr[i]>='a'&&arr[i]<='z')
+        {
+            arr[i]=arr[i]-32;
+        }
+        i++;
+    }
+    return arr;
+}
+int main()
+{
+    char arr[]="rahul";
+    printf("%s",transform(arr));
+    return 0;
+}
+
+5.Program
+// Write a function to transform a string into lowercase
+#include<stdio.h>
+char *transform(char *arr)
+{
+    int i=0;
+    while(arr[i]!='\0')
+    {
+        if(arr[i]>='A'&&arr[i]<='Z')
+        {
+            arr[i]=arr[i]+32;
+        }
+        i++;
+    }
+    return arr;
+}
+int main()
+{
+    char arr[]="RAHUL Singh";
+    printf("%s",transform(arr));
+    return 0;
+}
+
+6.Program
+/*
+Write a function to check whether a given string is an alphanumeric string or not.
+(Alphanumeric string must contain at least one alphabet and one digit)
+*/
+#include<stdio.h>
+int alphaNumeric(char *arr)
+{
+    int i=0,n=0,a=0;
+    while(arr[i]!='\0')
+    {
+        if((arr[i]>='A'&&arr[i]<='Z')||(arr[i]>='a'&&arr[i]<='z'))
+        {
+           i++;
+           a=1;
+        }
+        if((arr[i]>='0'&&arr[i]<='9'))
+        {
+           i++;
+           n=1;
+        }
+    }
+    if(a&&n)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int main()
+{
+    char arr[]="Rahul123";
+    if(alphaNumeric(arr))
+       printf("Alphanumeric");
+    else
+       printf("Not alphanumeric");
+    return 0;
+}
+
+7.Program
+// Write a function to check whether a given string is palindrome or not
+#include<stdio.h>
+#include<string.h>
+int Palindrome(char *arr)
+{
+    int i=0,j;
+    j=strlen(arr)-1;
+    while(i<=j)
+    {
+        if(arr[i]!=arr[j])
+            return 0;
+        i++;
+        j--;
+    }
+    return 1;
+}
+int main()
+{
+    char str[]="level";
+    if(Palindrome(str))
+    {
+        printf("Palindrome");
+    }
+    else
+    {
+        printf("Not");
+    }
+    return 0;
+}
+
+8.Program
+// Write a function to count words in a given string
+#include<stdio.h>
+int Count(char *str)
+{
+    int i=0;
+    while(str[i]!='\0')
+    {
+        i++;
+    }
+    return i;
+}
+int main()
+{
+    char arr[]="Rama";
+    printf("%d",Count(arr));
+    return 0;
+}
+
+9.Program
+/*
+Write a function to reverse a string word wise. (For example if the given string is
+“Mysirg Education Services” then the resulting string should be “Services Education
+Mysirg” )
+*/
+#include<stdio.h>
+// #include<string.h>
+void swap(char a[],int i,int j)
+{
+    char temp;
+    while(i<=j)
+    {
+        temp=a[i];
+        a[i]=a[j];
+        a[j]=temp;
+        i++;
+        j--;
+    }
+}
+int main()
+{
+    char ch[]=" My name is Rahul";
+    int i=0,start=0,end=0,flag=0;
+    while(ch[i]!='\0')
+    {
+        while(ch[i]!=' ')
+        {
+            if(ch[i]=='\0')
+            {
+                flag=1;
+                break;
+            }
+            end++;
+            i++;
+        }
+        swap(ch,start,end-1);
+        if(flag==1)
+           break;
+        start=end++;
+        i++;
+    }
+    swap(ch,0,i-1);
+    printf("%s",ch);
+    return 0;
+}
+
+10.Program
+// Write a function to find the repeated character in a given string.
+#include<stdio.h>
+#include<string.h>
+void checkRepeat(char * str,int n)
+{
+    int t[256]={0};
+    int j;
+    for(j=0;j<256;j++)
+    {
+        t[str[j]]++;
+    }
+   
+
+    for(j=0;j<n;j++)
+    {
+        printf("%c==>%d\n",str[j],t[str[j]]);
+    }
+}
+
+int main()
+{
+    char str[256];
+    int n;
+    printf("Enter length of string:");
+    scanf("%d",&n);
+    printf("Enter a string: ");
+    fflush(stdin);
+    fgets(str,n+1,stdin);
+    checkRepeat(str,n);
+    return 0;
+}
