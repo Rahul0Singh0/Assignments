@@ -1,0 +1,528 @@
+1.Program
+/*
+Define a class Complex with appropriate instance variables and member functions.
+Define following operators in the class:
+a. +
+b. -
+c. *
+d. ==
+*/
+#include<iostream>
+using namespace std;
+class Complex
+{
+    int a,b;
+    public:
+       Complex(){cout<<"Default Constructor"<<endl;}
+       Complex(int a,int b)
+       {
+        cout<<"Parameterised Constructor"<<endl;
+        this->a=a;
+        this->b=b;
+       }
+       void display()
+       {
+          cout<<"a = "<<a<<" b = "<<b<<endl;
+       }
+       Complex operator+(Complex c)//for member function 
+       //implicitly pass another object
+       {
+          Complex temp;
+          temp.a=a+c.a;
+          temp.b=b+c.b;
+          return temp;
+       }
+       Complex operator-(Complex c)
+       {
+          Complex temp;
+          temp.a=a-c.a;
+          temp.b=b-c.b;
+          return temp;
+       }
+       Complex operator*(Complex c)
+       {
+           Complex temp;
+           temp.a=a*c.a;
+           temp.b=b*c.b;
+           return temp;
+       }
+       int operator==(Complex c)
+       {
+          if(c.a==a && c.b==b)
+          {
+            return 1;
+          }
+          else
+             return 0;
+             
+       }
+};
+int main()
+{
+    Complex c1(1,2),c2(2,3);
+    // Complex c3=c1.operator+(c2);
+    Complex c3=c1+c2;
+    if(c1.operator==(c2))
+    {
+        cout<<"Equal"<<endl;
+    }
+    else
+    {
+        cout<<"Not equal"<<endl;
+    }
+    c1.display();
+    c2.display();
+    c3.display();
+    return 0;
+}
+
+2.Program
+// Write a C++ program to overload unary operators that is increment and decrement
+#include<iostream>
+using namespace std;
+class Check{
+    int a;
+    public:
+      Check(){}
+      Check(int a)
+      {this->a=a;}
+      void display()
+      {
+        cout<<a<<endl;
+      }
+      Check operator++()
+      {
+        Check temp;
+        temp.a=++a;
+        return temp;
+      }
+      Check operator++(int useless)//to pass for compiler to identify the post incre.
+      {
+        Check temp;
+        temp.a=a++;
+        return temp;
+      }
+};
+int main()
+{
+    Check c=2;
+    ++c;
+    (c++).display();
+    c.display();
+    (++c).display();
+    return 0;
+}
+
+3.Program
+//Write a C++ program to add two complex numbers using operator overloaded by a
+//friend function
+#include<iostream>
+using namespace std;
+class Complex{
+    int a,b;
+    public:
+    Complex(){}
+    Complex(int a,int b)
+    {
+        this->a=a;
+        this->b=b;
+    }
+    //It is not member function so explicitly pass both objects
+    friend Complex operator+(Complex,Complex); 
+    void display()
+    {
+        cout<<"a = "<<a<<" b = "<<b<<endl;
+    }
+};
+Complex operator+(Complex c1,Complex c2)//It is not member of Complex class so, not required scope resoluton(::)
+{
+    Complex temp;
+    temp.a=c1.a+c2.a;
+    temp.b=c1.b+c2.b;
+    return temp;
+
+}
+int main()
+{
+    Complex c1(1,2),c2(2,3);
+    Complex c=c1+c2;
+    c.display();
+    
+}
+
+4.Program
+/*
+Create a class Time which contains:
+- Hours
+- Minutes
+- Seconds
+Write a C++ program using operator overloading for the following:
+1. = = : To check whether two Times are the same or not.
+2. >> : To accept the time.
+3. << : To display the time.
+*/
+#include<iostream>
+using namespace std;
+class Time{
+    int hh,mm,ss;
+    public:
+       Time(){}
+       int operator==(Time t)
+       {
+          if(t.hh==hh && t.mm==mm && t.ss==ss)
+              return 1;
+          return 0;
+       }
+       friend ostream& operator<<(ostream&,Time);
+       friend istream& operator>>(istream&,Time&);
+};
+ostream& operator<<(ostream &os,Time t)
+{
+          cout<<"Hours : "<<t.hh<<endl;
+          cout<<"Minutes : "<<t.mm<<endl;
+          cout<<"Seconds : "<<t.ss<<endl;
+          return os;
+}
+istream& operator>>(istream &is,Time &t)
+{
+          cout<<"----------------"<<endl;
+          cout<<"Enter hours : ";
+          is>>t.hh;
+          cout<<"Enter minutes : ";
+          is>>t.mm;
+          cout<<"Enter seconds : ";
+          is>>t.ss;
+          cout<<endl; 
+          return is;
+}
+int main()
+{
+    Time t1,t2;
+    cout<<"Enter First time"<<endl;
+    cin>>t1;
+    cout<<t1<<endl;
+    cout<<"Enter Second time"<<endl;
+    cin>>t2;
+    cout<<t2<<endl;
+    if(t1==t2)
+      cout<<"Same time"<<endl;
+    else
+      cout<<"Not same"<<endl;
+    
+}
+
+5.Program
+/*
+class Numbers
+{
+int x,y,z;
+public:
+// methods
+};
+Overload the operator unary minus (-) to negate the numbers.
+*/
+#include<iostream>
+using namespace std;
+class Numbers{
+    int x,y,z;
+    public:
+       Numbers(int x,int y,int z)
+       {
+        this->x=x;this->y=y;this->z=z;
+       }
+       Numbers(){}
+       Numbers operator-()
+       {
+          Numbers temp;
+          temp.x=-x;
+          temp.y=-y;
+          temp.z=-z;
+          return temp;
+       }
+       friend ostream& operator<<(ostream&,Numbers);
+};
+ostream& operator<<(ostream& os,Numbers n)
+{
+    os<<n.x<<endl;
+    os<<n.y<<endl;
+    os<<n.z<<endl;
+    return os;
+}
+int main()
+{
+    Numbers n1(-2,3,4);
+    cout<<n1<<endl;
+    cout<<-n1;
+}
+
+6.Program
+/*
+Create a class CString to represent a string.
+a) Overload the + operator to concatenate two strings.
+b) == to compare 2 strings.
+*/
+#include<iostream>
+#include<cstring>
+#include<string>
+using namespace std;
+class CString{
+    public:
+    char s[25];
+    public:
+       CString(){};
+       CString(char s[])
+       {
+        //  this->s=s;//SHallow copy
+        strcpy(this->s,s);
+       }
+       friend ostream& operator<<(ostream&,CString);
+       CString operator+(CString& S)
+       {
+         CString temp;
+         strcat(this->s,S.s);
+         strcpy(temp.s,this->s);
+         return temp;
+       }
+       CString(const CString &S){
+        strcpy(s,S.s);
+       }
+};
+ostream& operator<<(ostream& os,CString s)
+{
+    os<<s.s;
+    return os;
+}
+int main()
+{
+    CString s1="Rahul";
+    CString s2="Singh";
+    CString s3;
+    s3=s1+s2;
+    CString s4=s3;
+    cout<<s3<<endl;
+    cout<<s4<<endl;
+}
+
+7.Program
+/*
+Define a C++ class fraction
+class fraction
+{
+long numerator;
+long denominator;
+Public:
+fraction (long n=0, long d=0);
+}
+Overload the following operators as member or friend:
+a) Unary ++ (pre and post both)
+b) Overload as friend functions: operators << and >>
+*/
+#include<iostream>
+using namespace std;
+class fraction{
+    long numerator,denominator;
+    public:
+    //    fraction(){}
+       fraction(long n=0,long d=0)
+       {
+          numerator=n;denominator=d;
+       }
+       fraction operator++(int unusual)//post
+       {
+           fraction temp;
+           temp.numerator=numerator++;
+           temp.denominator=denominator++;
+           return temp;
+       }
+       fraction operator++()//pre
+       {
+           fraction temp;
+           temp.numerator=++numerator;
+           temp.denominator=++denominator;
+           return temp;
+       }
+        friend ostream& operator<<(ostream&,fraction);
+        friend istream& operator>>(istream&,fraction&);
+};
+ostream& operator<<(ostream& os,fraction f)
+{
+    os<<"f   :   "<<f.numerator<<"/"<<f.denominator<<endl;
+    return os;
+}
+istream& operator>>(istream& is,fraction& f)
+{
+    cout<<"Numerator    : ";
+    cin>>f.numerator;
+            cout<<"Denominator  : ";
+            cin>>f.denominator;
+
+            return is;
+}
+int main()
+{
+    fraction f;
+    cout<<++f;
+    cin>>f;
+    f++;
+    cout<<f;
+}
+
+8.Program
+/*
+Class Matrix
+{
+int a[3][3];
+Public:
+//methods;
+};
+Overload the - (Unary) should negate the numbers stored in the object
+*/
+#include<iostream>
+using namespace std;
+class Matrix{
+    int a[3][3];
+    public:
+      void accept()
+      {
+        cout<<"Enter 3x3 matrix"<<endl;
+         for(int i=0;i<3;i++){
+          for(int j=0;j<3;j++){
+            cin>>a[i][j];
+          }
+         }
+      }
+      void display(){
+        cout<<"Matrix is : "<<endl;
+        for(int i=0;i<3;i++){
+          for(int j=0;j<3;j++){
+            cout<<a[i][j]<<" ";
+          }
+          cout<<endl;
+        }
+      }
+      void operator-(){
+        for(int i=0;i<3;i++){
+          for(int j=0;j<3;j++){
+            a[i][j]=-a[i][j];
+          }
+        }
+      }
+
+};
+int main()  
+{
+   Matrix m;
+   m.accept();
+   m.display();
+   -m;
+   m.display();
+}
+
+9.Program
+/*
+Class mystring
+{
+char str [100];
+Public:
+// methods
+};
+Overload operator “!” to reverse the case of each alphabet in the string
+(Uppercase to Lowercase and vice versa)
+*/
+#include<iostream>
+using namespace std;
+class mystring{
+    char str[100];
+    public:
+    void acceptString(){
+        cout<<"Enter string: ";
+        cin>>str;
+    }
+    void display(){
+        cout<<"String is: ";
+        cout<<str<<endl;
+    }
+    void operator!();
+};
+void mystring::operator!(){
+    for(int i=0;str[i]!='\0';i++){
+        if(str[i]>=65&&str[i]<=96)
+            str[i]+=32;
+        else if(str[i]>=97&&str[i]<=122)
+            str[i]-=32;
+    }
+}
+int main()
+{
+    mystring m;
+    m.acceptString();
+    m.display();
+    !m;
+    m.display();
+}
+
+10.Program
+/*
+Class Matrix
+{
+int a[3][3];
+Public:
+//methods;
+};
+Let m1 and m2 are two matrices. Find out m3=m1+m2 (use operator
+overloading
+*/
+#include<iostream>
+using namespace std;
+class Matrix{
+    int a[3][3];
+    public:
+      void accept(int i,int j,int num){
+        a[i][j]=num;
+      }
+      void dislay()
+      {
+        for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            cout<<a[i][j]<<" ";
+        }
+        cout<<endl;
+        } 
+      }
+      Matrix operator+(Matrix);
+      
+};
+Matrix Matrix::operator+(Matrix m){
+    Matrix m1;
+    int n;
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+          m1.a[i][j]=a[i][j]+m.a[i][j];
+        }
+    }
+    return m1;
+}
+int main()
+{
+    Matrix m1,m2,m3;
+    int num;
+    cout<<"Enter a 3x3 matrix:";
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            cin>>num;
+            m1.accept(i,j,num);
+        }
+    }
+    m1.dislay();
+    cout<<"Enter a 3x3 matrix:";
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            cin>>num;
+            m2.accept(i,j,num);
+        }
+    }
+    m2.dislay();
+    cout<<"Sum of two matrix is :"<<endl;
+    m3=m1+m2;
+    m3.dislay();
+}
