@@ -1,0 +1,173 @@
+1.// Write a function to swap values of two in variables of calling function. (TSRS)
+#include<stdio.h>
+void swap(int *a,int *b)
+{
+    *a=*a+*b;
+    *b=*a-*b;
+    *a=*a-*b;
+}
+int main()
+{
+    int a=3,b=5;
+    printf("Befor swap: a=%d b=%d\n",a,b);
+    swap(&a,&b);
+    printf("After swap: a=%d b=%d\n",a,b);
+    
+}
+
+2.//Write a function to swap strings of two char arrays of calling functions. (TSRS)
+#include<stdio.h>
+void swap(char **a,char **b){
+    char *temp=*a;
+    *a=*b;
+    *b=temp;
+}
+int main()
+{
+    char *a[20],*b[20];//char array
+    printf("Enter 2 strings : ");
+    gets(a);
+    gets(b);
+    swap(&a,&b);
+    printf("%s %s",a,b);
+    return 0;
+}
+
+3.//Write a function to sort an array of int type values. [ void sort(int *ptr,int size); ]
+#include<stdio.h>
+void sort(int *ptr,int size){
+    for(int i=0;i<size-1;i++){
+        for(int j=i+1;j<size;j++){
+            if(*(ptr+i)>*(ptr+j))
+            {
+                int temp=*(ptr+i);
+                *(ptr+i)=*(ptr+j);
+                *(ptr+j)=temp;
+            }
+        }
+    }
+}
+int main()
+{
+    int arr[]={4,2,5,7,2,8,9,0,1,3};
+    int size=sizeof(arr)/sizeof(arr[0]);
+    sort(arr,size);
+    for(int i=0;i<size;i++)
+       printf("%d ",arr[i]);
+}
+
+4.// Write a program in C to demonstrate how to handle the pointers in the program
+#include<stdio.h>
+int main()
+{
+    int x=10,*p,**q,***r;
+    p=&x;q=&p;r=&q;
+    printf("%d %d %d %d\n",x,*p,**q,***r);
+    printf("%d %d %d\n",&x,p,*q,**r);
+    printf("%d %d %d\n",&p,q,*r);
+    printf("%d %d\n",&q,r);
+    printf("%d",&r);
+    return 0;
+}
+
+5.// Write a program to print the first N odd natural numbers in reverse order
+#include<stdio.h>
+void odd(int *n)
+{
+    for(int i=0;i<*n;i++){
+        printf("%d ",2*i+1);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    odd(&n);
+    return 0;
+}
+
+6.// Write a program to print the first N even natural numbers
+#include<stdio.h>
+void even(int *n)
+{
+    for(int i=1;i<=*n;i++){
+        printf("%d ",2*i);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    even(&n);
+    return 0;
+}
+
+7.// Write a program to print the first N even natural numbers in reverse order
+#include<stdio.h>
+void evenReverse(int *n)
+{
+    for(int i=*n;i>=1;i--){
+        printf("%d ",2*i);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    evenReverse(&n);
+    return 0;
+}
+
+8.// Write a program to print squares of the first N natural numbers
+#include<stdio.h>
+void sqaure(int *n)
+{
+    for(int i=1;i<=*n;i++){
+        printf("%d -> %d\n",i,i*i);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    square(&n);
+    return 0;
+}
+
+9.// Write a program to print cubes of the first N natural numbers
+#include<stdio.h>
+void cube(int *n)
+{
+    for(int i=1;i<=*n;i++){
+        printf("%d -> %d\n",i,i*i*i);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    cube(&n);
+    return 0;
+}
+
+10.// Write a program to print a table of N
+#include<stdio.h>
+void table(int *n)
+{
+    for(int i=1;i<=10;i++){
+        printf("%d x %d -> %d\n",*n,i,(*n)*i);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter a number: ");
+    scanf("%d",&n);
+    table(&n);
+    return 0;
+}
