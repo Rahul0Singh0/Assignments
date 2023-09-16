@@ -1,0 +1,345 @@
+1.// Define a structure Employee with member variables id, name, salary
+#include<stdio.h>
+struct Employee
+{
+    int id;
+    char *name;
+    int salary;
+};
+
+2.// Write a function to take input employee data from the user. [ Refer structure from
+// question 1 ]
+#include<stdio.h>
+struct Employee
+{
+    int id;
+    char *name;
+    int salary;
+};
+int main()
+{
+    struct Employee e[5],temp;
+    for(int i=0;i<3;i++){
+        printf("Enter a name of %d employee",i+1);
+        fflush(stdin);
+        fgets(e[i].name,30,stdin);
+        printf("Enter salary of %d employee",i+1);
+        scanf("%d",&e[i].salary);
+    }
+}
+
+3.// Write a function to display employee data. [ Refer structure from question 1 ]
+#include<stdio.h>
+struct Employee
+{
+    int id;
+    char name[30];
+    int salary;
+};
+void printDetails(struct Employee *e)
+{
+    for(int i=0;i<3;i++){
+        printf("\n\nDetails of %d student : \n",i+1);
+        printf("\nId = %d",e[i].id);
+        printf("\nName = %s",e[i].name);
+        printf("\nSalary = %d",e[i].salary);
+    }
+}
+int main()
+{
+    struct Employee e[5];
+    for(int i=0;i<3;i++){
+        e[i].id=i+1;
+        printf("Enter a name of %d employee: ",i+1);
+        fflush(stdin);
+        fgets(e[i].name,30,stdin);
+        printf("Enter salary of %d employee: ",i+1);
+        scanf("%d",&e[i].salary);
+    }
+    printDetails(e);
+
+}
+
+4./*
+Write a function to find the highest salary employee from a given array of 10
+employees. [ Refer structure from question 1]
+*/
+#include<stdio.h>
+struct Employee
+{
+    int id;
+    char name[30];
+    int salary;
+};
+struct Employee highest(struct Employee *e)
+{
+    struct Employee temp=e[0];
+    for(int i=0;i<3;i++)
+    {
+        if(e[i].salary>temp.salary){
+            temp=e[i];
+        }
+    }
+    return temp;
+}
+int main()
+{
+    struct Employee e[5],temp;
+    for(int i=0;i<3;i++){
+        e[i].id=i+1;
+        printf("Enter a name of %d employee: ",i+1);
+        fflush(stdin);
+        fgets(e[i].name,30,stdin);
+        printf("Enter salary of %d employee: ",i+1);
+        scanf("%d",&e[i].salary);
+    }
+    temp=highest(e);
+    printf("Highest Salary : %d",temp.salary);
+    printf("\nId : %d",temp.id);
+    printf("\nName : %s",temp.name);
+    return 0;
+}
+
+5.// Write a function to sort employees according to their salaries [ refer structure from
+// question 1]
+#include<stdio.h>
+struct Employee
+{
+    int id;
+    char name[30];
+    int salary;
+};
+void printDetails(struct Employee *e)
+{
+    for(int i=0;i<3;i++){
+        printf("\n\nDetails of %d student : \n",i+1);
+        printf("\nId = %d",e[i].id);
+        printf("\nName = %s",e[i].name);
+        printf("\nSalary = %d",e[i].salary);
+    }
+}
+void sort(struct Employee *e){
+    for(int i=0;i<2;i++){
+        for(int j=i+1;j<3;j++){
+            if(e[i].salary>e[j].salary)
+            {
+                struct Employee t=e[i];
+                e[i]=e[j];
+                e[j]=t;
+            }
+        }
+    }   
+}
+int main()
+{
+    struct Employee e[5];
+    for(int i=0;i<3;i++){
+        e[i].id=i+1;
+        printf("Enter a name of %d employee: ",i+1);
+        fflush(stdin);
+        fgets(e[i].name,30,stdin);
+        printf("Enter salary of %d employee: ",i+1);
+        scanf("%d",&e[i].salary);
+    }
+    printDetails(e);
+    sort(e);
+    printf("\nAfter sorted\n");
+    printDetails(e);
+}
+
+6./*Write a function to sort employees according to their names [refer structure from
+question 1]*/
+#include<stdio.h>
+#include<string.h>
+struct Employee
+{
+    int id;
+    char name[30];
+    int salary;
+};
+void printDetails(struct Employee *e)
+{
+    for(int i=0;i<3;i++){
+        printf("\n\nDetails of %d student : \n",i+1);
+        printf("\nId = %d",e[i].id);
+        printf("\nName = %s",e[i].name);
+        printf("\nSalary = %d",e[i].salary);
+    }
+}
+void sort(struct Employee *e){
+    for(int i=0;i<2;i++){
+        for(int j=i+1;j<3;j++){
+            if(strcmp(e[i].name,e[j].name)>0)
+            {
+                struct Employee t=e[i];
+                e[i]=e[j];
+                e[j]=t;
+            }
+        }
+    }   
+}
+int main()
+{
+    struct Employee e[5];
+    for(int i=0;i<3;i++){
+        e[i].id=i+1;
+        printf("Enter a name of %d employee: ",i+1);
+        fflush(stdin);
+        fgets(e[i].name,30,stdin);
+        printf("Enter salary of %d employee: ",i+1);
+        scanf("%d",&e[i].salary);
+    }
+    printDetails(e);
+    sort(e);
+    printf("\nAfter sorted\n");
+    printDetails(e);
+}
+
+7.// Write a program to calculate the difference between two time periods
+#include<stdio.h>
+struct time{
+    int sec;
+    int min;
+    int hour;
+};
+int main()
+{
+    struct time start,end,diff,temp;
+    printf("Enter starting time:\n");
+    printf("Hour : ");
+    scanf("%d",&start.hour);
+    printf("Minute : ");
+    scanf("%d",&start.min);
+    printf("Second : ");
+    scanf("%d",&start.sec);
+
+    printf("\nEnter ending time:\n");
+    printf("Hour : ");
+    scanf("%d",&start.hour);
+    printf("Minute : ");
+    scanf("%d",&start.min);
+    printf("Second : ");
+    scanf("%d",&start.sec);
+
+    temp.hour=start.hour;
+    temp.min=start.min;
+    temp.sec=start.sec;
+    while(end.sec>start.sec){
+        --start.min;
+        start.sec+=60;
+    }
+    while(end.min>start.min){
+        --start.hour;
+        start.min+=60;
+    }
+    diff.min=start.min-end.min;
+    diff.hour=start.hour-end.hour;
+    printf("Difference between starting and ending time is\n");
+    printf("Hour : %d",diff.hour);
+    printf("Minute : %d",diff.min);
+    printf("Second : %d",diff.sec);
+}
+
+8.// Write a program to store information of 10 students and display them using structure
+#include<stdio.h>
+struct Student
+{
+    int rollno;
+    char name[20];
+    int class;
+};
+int main()
+{
+    int n;
+    printf("Enter no. of students: ");
+    scanf("%d",&n);
+    struct Student s[100];
+    for(int i=0;i<n;i++){
+        printf("\nEnter %d student details",i+1);
+        printf("\nRoll No. : ");
+        scanf("%d",&s[i].rollno);
+        printf("\nName : ");
+        fflush(stdin);
+        fgets(s[i].name,20,stdin);
+        printf("\nClass : ");
+        scanf("%d",&s[i].class);
+    }
+
+    printf("Student details are\n");
+    for(int i=0;i<n;i++){
+        printf("\n%d student",i+1);
+        printf("\nRoll No. : %d",s[i].rollno);
+        printf("\nName : %s",s[i].name);
+        printf("\nClass : %d",s[i].class);
+    }
+
+}
+
+9.// Write a program to store information of n students and display them using structure
+#include<stdio.h>
+struct Student
+{
+    int rollno;
+    char name[20];
+    int class;
+};
+int main()
+{
+    int n;
+    printf("Enter no. of students: ");
+    scanf("%d",&n);
+    struct Student s[100];
+    for(int i=0;i<n;i++){
+        printf("\nEnter %d student details",i+1);
+        printf("\nRoll No. : ");
+        scanf("%d",&s[i].rollno);
+        printf("\nName : ");
+        fflush(stdin);
+        fgets(s[i].name,20,stdin);
+        printf("\nClass : ");
+        scanf("%d",&s[i].class);
+    }
+
+    printf("Student details are\n");
+    for(int i=0;i<n;i++){
+        printf("\n%d student",i+1);
+        printf("\nRoll No. : %d",s[i].rollno);
+        printf("\nName : %s",s[i].name);
+        printf("\nClass : %d",s[i].class);
+    }
+
+}
+
+10./*Write a program to enter the marks of 5 students in Chemistry, Mathematics and
+Physics (each out of 100) using a structure named Marks having elements roll no.,
+name, chem_marks, maths_marks and phy_marks and then display the percentage
+of each student.*/
+#include<stdio.h>
+struct Student
+{
+    int chem,maths,physics;
+    char name[20];
+    int rollno;
+};
+int main()
+{
+    struct Student s[5];
+    for(int i=0;i<5;i++){
+        printf("\nEnter %d student details",i+1);
+        s[i].rollno=i+1;
+        printf("\nName : ");
+        fflush(stdin);
+        fgets(s[i].name,20,stdin);
+        printf("\nChemistry Marks : ");
+        scanf("%d",&s[i].chem);
+        printf("\nPhysics Marks : ");
+        scanf("%d",&s[i].physics);
+        printf("\nMaths Marks : ");
+        scanf("%d",&s[i].maths);
+    }
+    printf("Percentage of students are \n");
+    for(int i=0;i<5;i++){
+        printf("\n%d student ",i+1);
+        printf("Percentage : %d",(s[i].chem+s[i].maths+s[i].physics)/3);
+    }
+}
