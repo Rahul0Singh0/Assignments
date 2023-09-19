@@ -1,0 +1,347 @@
+1./*
+Define a class Complex with appropriate instance variables and member functions.
+Overload following operators
+a. << insertion operator
+b. >> extraction operator
+*/
+#include<iostream>
+using namespace std;
+class Complex
+{
+    int real,img;
+    public:
+        Complex(int r,int i)
+        {
+            real=r;img=i;
+        }
+        Complex(){}
+        friend ostream& operator<<(ostream&,Complex);
+        friend istream& operator>>(istream&,Complex&);
+};
+istream& operator>>(istream&is,Complex &c){
+    cout<<"Real No. : ";
+    is>>c.real;
+    cout<<"Img No. : ";
+    is>>c.img;
+    return is;
+}
+ostream& operator<<(ostream&os,Complex c){
+    os<<"Complex number is : ";
+    os<<c.real<<" + "<<c.img<<"i";
+    return os;
+}
+int main()
+{
+    Complex c(2,3);
+    Complex c1;
+    cin>>c1;
+    cout<<c<<endl;
+    cout<<c1;
+}
+
+2./*Define a class Complex with appropriate instance variables and member functions.
+One of the functions should be setData() to set the properties of the object. Make
+ sure the names of formal arguments are the same as names of instance variable*/
+#include<iostream>
+using namespace std;
+class Complex
+{
+    int real,img;
+    public:
+        void setData(int real,int img){
+            this->real=real;this->img=img;
+        }
+        Complex(){}
+        friend ostream& operator<<(ostream&,Complex);
+        friend istream& operator>>(istream&,Complex&);
+};
+istream& operator>>(istream&is,Complex &c){
+    cout<<"Real No. : ";
+    is>>c.real;
+    cout<<"Img No. : ";
+    is>>c.img;
+    return is;
+}
+ostream& operator<<(ostream&os,Complex c){
+    os<<"Complex number is : ";
+    os<<c.real<<" + "<<c.img<<"i";
+    os<<endl;
+    return os;
+}
+int main()
+{
+    Complex c1,c2;
+    c1.setData(2,3);
+    c2.setData(3,4);
+    cout<<c1<<c2;
+}
+
+3./*Overload subscript operator [] that will be useful when we want to check for an index
+out of bound*/
+#include<iostream>
+using namespace std;
+class Array
+{
+    int a[100];
+    const int size =100;
+    public:
+       void setArray(int n,int index)
+       {
+           if(index>=size)
+           {
+              cout<<"Array Index Out Of Bound Exception"<<endl;
+              exit(0);
+           }
+           a[index]=n;
+       }
+       void display(int index)
+       {
+           cout<<a[index]<<endl;
+       }
+       int operator[](int index)
+       {
+           if(index>=size)
+           {
+              cout<<"Array Index Out Of Bound Exception"<<endl;
+              exit(0);
+           }
+           return a[index];
+       }
+};
+int main()
+{
+    Array a;
+    a.setArray(10,45);
+    a.display(45);
+    cout<<a[45]<<endl;
+    cout<<a[101]<<endl;
+
+}
+
+4./*Create a student class and overload new and delete operators as a member function
+of the class*/
+#include<iostream>
+using namespace std;
+class Student{
+    string name;
+    int age;
+    public:
+       Student(){}
+       Student(string name,int age){
+        // strcpy(this->name,name);
+        this->name.assign(name);
+        this->age=age;
+       }
+       void display(){
+        cout<<"Name : "<<name<<"\nAge : "<<age<<endl;
+       }
+       void* operator new(size_t size){
+          cout<<"Overloading new operator of size "<<size<<endl;
+          void *p=::operator new(size);
+          return p;
+       }
+        void operator delete(void * p)
+       {
+        cout<< "Overloading delete operator " << endl;
+        free(p);
+       }
+};
+int main()
+{
+    Student *p=new Student("Rahul",22);
+    p->display();
+    delete p;
+}
+
+5./*Create a student class and overload new and delete operators outside the class.*/
+#include <iostream>
+using namespace std;
+class Student
+{
+    string name;
+    int age;
+
+public:
+    Student() {}
+    Student(string name, int age)
+    {
+        // strcpy(this->name,name);
+        this->name.assign(name);
+        this->age = age;
+    }
+    void display()
+    {
+        cout << "Name : " << name << "\nAge : " << age << endl;
+    }
+    void *operator new(size_t);
+    void operator delete(void*);
+};
+void* Student :: operator new(size_t size)
+{
+    cout << "Overloading new operator of size " << size << endl;
+    void *p = ::operator new(size);
+    return p;
+}
+void Student :: operator delete(void *p)
+{
+    cout << "Overloading delete operator " << endl;
+    free(p);
+}
+int main()
+{
+    Student *p = new Student("Rahul", 22);
+    p->display();
+    delete p;
+}
+
+6./*Create a complex class and overload assignment operator for that class*/
+#include<iostream>
+using namespace std;
+class Complex{
+    int img,real;
+    public:
+      Complex(){}
+      Complex(int real,int img){
+        this->real=real;this->img=img;
+      }
+      void display(){
+        cout<<real<<" + "<<img<<"i"<<endl;
+      }
+      Complex(Complex&c){//copy constructor(solution of arise problem on string (because synamically allocate memory))
+        real=c.real;
+        img=c.img;
+      }
+      Complex& operator=(Complex&c){
+        this->real=real;
+        this->img=img;
+        return *this;//it means return reference
+        // return this;//it means return pointer
+      }
+};
+int main()
+{
+    Complex c1(2,3);
+    Complex c2=c1;
+    Complex c3;
+    c3=c1;
+    c1.display();
+    c2.display();
+    c3.display();
+}
+
+7.// Create an Integer class and overload logical not operator for that class.
+#include<iostream>
+using namespace std;
+class Integer
+{
+    int i;
+    public:
+       Integer(int i):i(i)//assign i to i
+       {
+
+       }
+       int operator!()
+       {
+           return !i;
+       }
+};
+int main()
+{
+    Integer i=10;
+    cout<<!i;
+    return 0;
+}
+
+8./*Create a Coordinate class for 3 variables x,y and z and overload comma operator
+such that when you write  c3 = (c1 , c2 ) then c2 is assigned to c3. Where c1,c2,and
+c3 are objects of 3D coordinate class*/
+#include<iostream>
+using namespace std;
+class Coords3D{
+    double x,y,z;
+    public:
+       Coords3D(){x=y=z=0;}
+       Coords3D(double x,double y,double z){
+        this->x=x;this->y=y;this->z=z;
+       }
+       void display(){
+        cout<<"x="<<x<<endl;
+        cout<<"y="<<y<<endl;
+        cout<<"z="<<z<<endl;
+       }
+       Coords3D operator,(Coords3D obj){
+        Coords3D temp;
+        temp.x=obj.x;
+        temp.y=obj.y;
+        temp.z=obj.z;
+        return temp;
+       }
+};
+int main()
+{
+    Coords3D c1(1,2,5);
+    Coords3D c2(2,4,6);
+    Coords3D c3;
+    c3=(c1,c2);//the rightmost object c3 is assign to c3
+    //This will also done without overload but this is shallow copy
+    c1.display();
+    c2.display();
+    c3.display();
+}
+
+9./*Create an Integer class that contains int x as an instance variable and overload
+casting int() operator that will type cast your Integer class object to int data type*/
+#include<iostream>
+using namespace std;
+class Integer{
+    int x;
+    public:
+       Integer(int a){
+        x=a;
+       }
+       Integer(){}
+       operator int(){
+        return x;
+       }
+};
+int main()
+{
+    Integer i=4;
+    int a=i;
+    cout<<a;
+
+}
+
+10./*Create a Distance class having 2 instance variable feet and inches. Also create
+default constructor and parameterized constructor takes 2 variables . Now overload ()
+function call operator that takes 3 arguments a , b and c and set feet = a + c + 5 and
+inches = a+b + 15*/
+#include<iostream>
+using namespace std;
+class Distance{
+    int feet,inches;
+    public:
+       Distance(){}
+       Distance(int feet,int inches){
+        this->feet=feet;this->inches=inches;
+       }
+       void display(){
+        cout<<"Feet = "<<feet<<" Inches = "<<inches<<endl;
+       }
+       Distance operator()(int a,int b,int c){
+        Distance d;
+        d.feet=a+c+5;
+        d.inches=a+b+15;
+        return d;
+       }
+};
+int main()
+{
+    Distance d1(5,10);
+    Distance d2;
+    d1.display();
+    d2=d1(10,20,30);
+    d1.display();
+    d2.display();
+    return 0;
+}
