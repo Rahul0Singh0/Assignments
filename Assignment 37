@@ -1,0 +1,70 @@
+// 1. Declare a vector with Initialization and print the elements
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	vector<int> v{1,2,3,4,5,6,7,8,9,10};
+	// iterator are used to point at memory addresses of STL Container
+	vector<int>:: iterator it;
+	for(it = v.begin(); it != v.end(); it++) {
+	    cout<<*it<<" ";
+	}
+	vector<int>:: iterator i = v.begin();
+	advance(i, 3);// used to incerement iterator position
+	cout<<endl<<*i;
+	return 0;
+}
+
+// 2.
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+	vector<int> v;
+	while(true) {
+	    int a;
+	    cin>>a;
+	    if(a == -1) break;
+	    v.push_back(a);
+	}
+	// iterator are used to point at memory addresses of STL Container
+	vector<int>:: iterator it;
+	for(it = v.begin(); it != v.end(); it++) {
+	    cout<<*it<<" ";
+	}
+	vector<int>:: iterator i = v.begin();
+	advance(i, 3);// used to incerement iterator position
+	cout<<endl<<*i;
+	return 0;
+}
+
+// 3.
+#include <iostream>
+#include <vector>
+using namespace std;
+void display(vector<int> &v) {
+    // iterator are used to point at memory addresses of STL Container
+    vector<int>:: iterator it;
+	for(it = v.begin(); it != v.end(); it++) {
+	    cout<<*it<<" ";
+	}
+}
+vector<int>& input(vector<int>&v, int n) {
+    for(int i = 0; i < n; i++) {
+        int num;
+        cin>>num;
+        v.push_back(num);
+    }
+    return v;
+}
+int main() {
+	vector<int> v;
+	int n;
+	cin>>n;//Number of elements
+	v = input(v, n);
+	display(v);
+	return 0;
+}
